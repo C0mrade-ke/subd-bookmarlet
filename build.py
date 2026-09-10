@@ -22,8 +22,7 @@ for src_name, dst_name in PAIRS:
         continue
     lines = [l for l in src.read_text().splitlines() if not l.strip().startswith("//")]
     code = re.sub(r"\s+", " ", "\n".join(lines)).strip()
-    # safety: a // outside a string would comment out the one-liner.
-    # Ground truth = the payload must parse as JS.
+    
     if node:
         with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as tf:
             tf.write(code)
